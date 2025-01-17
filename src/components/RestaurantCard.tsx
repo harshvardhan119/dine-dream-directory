@@ -18,32 +18,32 @@ export const RestaurantCard = ({
   priceRange,
 }: RestaurantCardProps) => {
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="relative h-48 overflow-hidden">
+    <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300">
+      <div className="relative h-64 overflow-hidden">
         <img
           src={image}
           alt={name}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
-        <div className="absolute top-2 right-2 bg-white px-2 py-1 rounded-full text-sm font-semibold">
+        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold">
           {priceRange}
         </div>
       </div>
-      <CardHeader className="p-4">
+      <CardHeader className="p-6">
         <div className="flex justify-between items-start">
           <div>
-            <h3 className="font-semibold text-lg">{name}</h3>
+            <h3 className="font-bold text-xl text-gray-900 mb-2">{name}</h3>
             <p className="text-gray-600">{cuisine}</p>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center bg-yellow-50 px-2 py-1 rounded-lg">
             <Star className="h-4 w-4 text-yellow-400 fill-current" />
-            <span className="ml-1 text-sm font-medium">{rating}</span>
+            <span className="ml-1 font-medium text-yellow-700">{rating}</span>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="p-4 pt-0">
-        <Button className="w-full bg-primary hover:bg-primary/90">
-          Book a Table
+      <CardContent className="p-6 pt-0">
+        <Button className="w-full bg-primary hover:bg-primary/90 text-white">
+          Reserve a Table
         </Button>
       </CardContent>
     </Card>
