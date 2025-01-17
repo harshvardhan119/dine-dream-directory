@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface RestaurantCardProps {
   name: string;
@@ -17,6 +18,8 @@ export const RestaurantCard = ({
   image,
   priceRange,
 }: RestaurantCardProps) => {
+  const navigate = useNavigate();
+
   return (
     <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300">
       <div className="relative h-64 overflow-hidden">
@@ -42,7 +45,10 @@ export const RestaurantCard = ({
         </div>
       </CardHeader>
       <CardContent className="p-6 pt-0">
-        <Button className="w-full bg-primary hover:bg-primary/90 text-white">
+        <Button 
+          className="w-full bg-primary hover:bg-primary/90 text-white"
+          onClick={() => navigate("/booking")}
+        >
           Reserve a Table
         </Button>
       </CardContent>
