@@ -1,25 +1,64 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import axios from "axios";
 
 const BookingPage = () => {
-  const [date, setDate] = useState<Date>();
+  const { restaurantId } = useParams();
+  const [date, setDate] = useState<Date | undefined>();
   const [time, setTime] = useState("");
-  const [guests, setGuests] = useState("");
+  const [guests, setGuests] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [bookingStatus, setBookingStatus] = useState<string>("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (!restaurantId) {
+      toast.error("No restaurant selected");
+      navigate("/");
+    }
+  }, [restaurantId, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!date || !time || !guests) {
+    if (!date || !time || !guests || !userName || !userEmail) {
       toast.error("Please fill in all fields");
+      setBookingStatus("Booking Not Confirmed"); 
       return;
     }
-    toast.success("Booking confirmed! We'll send you a confirmation email shortly.");
-    navigate("/");
+
+   
+    const bookingData = {
+      restaurant_id: restaurantId,
+      user_name: userName,
+      user_email: userEmail,
+      date: date.toISOString().split("T")[0], 
+      time,
+      guests: parseInt(guests, 10),
+    };
+    console.log("Booking data being sent:", bookingData); // This will log the data in the console
+
+    try {
+      const response = await axios.post("https://bookbackend-delta.vercel.app/bookings", bookingData);
+
+      if (response.status === 201) { // Check if the booking was successfully created
+        toast.success("Booking confirmed! We'll send you a confirmation email shortly.");
+        setBookingStatus("Booking Confirmed"); // Set success status message
+        navigate("/"); // Navigate to the home or another page after successful booking
+      } else {
+        toast.error("Failed to confirm booking. Please try again.");
+        setBookingStatus("Booking Not Confirmed");
+      }
+    } catch (error) {
+      toast.error("Failed to confirm booking. Please try again.");
+      setBookingStatus("Booking Not Confirmed");
+      console.error("Error booking:", error);
+    }
   };
 
   return (
@@ -57,15 +96,8 @@ const BookingPage = () => {
                     </SelectTrigger>
                     <SelectContent>
                       {[
-                        "17:00",
-                        "17:30",
-                        "18:00",
-                        "18:30",
-                        "19:00",
-                        "19:30",
-                        "20:00",
-                        "20:30",
-                        "21:00",
+                        "17:00", "17:30", "18:00", "18:30", "19:00", "19:30",
+                        "20:00", "20:30", "21:00",
                       ].map((timeSlot) => (
                         <SelectItem key={timeSlot} value={timeSlot}>
                           {timeSlot}
@@ -95,10 +127,24 @@ const BookingPage = () => {
 
                 <div className="space-y-4">
                   <label className="block text-sm font-medium text-gray-700">
-                    Special Requests
+                    Your Name
                   </label>
                   <Input
-                    placeholder="Any dietary requirements or special occasions?"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    placeholder="Enter your full name"
+                    className="w-full"
+                  />
+                </div>
+
+                <div className="space-y-4">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Your Email
+                  </label>
+                  <Input
+                    value={userEmail}
+                    onChange={(e) => setUserEmail(e.target.value)}
+                    placeholder="Enter your email address"
                     className="w-full"
                   />
                 </div>
@@ -118,6 +164,13 @@ const BookingPage = () => {
               </Button>
             </div>
           </form>
+
+          {/* Booking status message */}
+          {bookingStatus && (
+            <div className="mt-4 text-center text-xl font-semibold text-gray-900">
+              {bookingStatus}
+            </div>
+          )}
         </div>
       </div>
     </div>

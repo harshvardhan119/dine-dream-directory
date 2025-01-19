@@ -16,7 +16,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/booking" element={<BookingPage />} />
+         
+          <Route path="/booking/:restaurantId" element={<BookingPage />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
