@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { rocket } from "lucide-react";
+import { Rocket } from "lucide-react";
 
 export const Hero = () => {
   return (
