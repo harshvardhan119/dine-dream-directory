@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { BookOpen, Timer, VolumeUp } from "lucide-react";
+import { BookOpen, Timer, Volume } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
@@ -75,7 +75,7 @@ const Quiz = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Timer className="w-6 h-6 text-primary-foreground" />
-                  <VolumeUp className="w-6 h-6 text-primary-foreground cursor-pointer hover:text-primary-foreground/80" />
+                  <Volume className="w-6 h-6 text-primary-foreground cursor-pointer hover:text-primary-foreground/80" />
                 </div>
               </div>
               <Progress value={progress} className="h-2" />
