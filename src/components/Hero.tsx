@@ -13,7 +13,7 @@ export const Hero = () => {
 
       {/* Animated Leaves */}
       <motion.div 
-        className="absolute right-0 top-0 w-48 h-48"
+        className="absolute right-10 top-10 w-32 h-32 z-10"
         animate={{
           rotate: [0, 5, 0, -5, 0],
           y: [0, -5, 0, -3, 0]
@@ -27,7 +27,7 @@ export const Hero = () => {
         <img 
           src="/lovable-uploads/361fbb9f-2719-4084-a80e-0d54ab127130.png" 
           alt="Decorative leaves" 
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain opacity-80"
         />
       </motion.div>
 
