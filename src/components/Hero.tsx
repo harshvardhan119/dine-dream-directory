@@ -11,6 +11,26 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-[url('/public/lovable-uploads/67d46b28-4c8c-4ad2-ac14-bc12d6101a72.png')] bg-repeat opacity-20" />
       </div>
 
+      {/* Animated Leaves */}
+      <motion.div 
+        className="absolute right-0 top-0 w-48 h-48"
+        animate={{
+          rotate: [0, 5, 0, -5, 0],
+          y: [0, -5, 0, -3, 0]
+        }}
+        transition={{
+          duration: 4,
+          ease: "easeInOut",
+          repeat: Infinity,
+        }}
+      >
+        <img 
+          src="/public/lovable-uploads/361fbb9f-2719-4084-a80e-0d54ab127130.png" 
+          alt="Decorative leaves" 
+          className="w-full h-full object-contain"
+        />
+      </motion.div>
+
       <div className="container mx-auto px-4 py-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div
