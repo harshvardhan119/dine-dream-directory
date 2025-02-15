@@ -8,7 +8,7 @@ export const Hero = () => {
     <div className="relative min-h-[80vh] bg-[#0066FF] overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[url('/public/lovable-uploads/67d46b28-4c8c-4ad2-ac14-bc12d6101a72.png')] bg-repeat opacity-20" />
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/67d46b28-4c8c-4ad2-ac14-bc12d6101a72.png')] bg-repeat opacity-20" />
       </div>
 
       {/* Animated Leaves */}
@@ -25,7 +25,7 @@ export const Hero = () => {
         }}
       >
         <img 
-          src="/public/lovable-uploads/361fbb9f-2719-4084-a80e-0d54ab127130.png" 
+          src="/lovable-uploads/361fbb9f-2719-4084-a80e-0d54ab127130.png" 
           alt="Decorative leaves" 
           className="w-full h-full object-contain"
         />
@@ -60,7 +60,7 @@ export const Hero = () => {
             className="relative"
           >
             <img
-              src="/public/lovable-uploads/67d46b28-4c8c-4ad2-ac14-bc12d6101a72.png"
+              src="/lovable-uploads/67d46b28-4c8c-4ad2-ac14-bc12d6101a72.png"
               alt="Educational Characters"
               className="w-full h-auto"
             />
